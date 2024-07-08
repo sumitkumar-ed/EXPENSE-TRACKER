@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useSnackbar } from 'notistack';
-import BalanceCard from '../components/BalanceCard/BalanceCard';
-import ExpenseCard from '../components/ExpenseCard/ExpenseCard';
-import ExpensePieChart from '../components/PieChart/PieChart';
-import TransactionList from '../components/TransactionList/TransactionList';
-import ProgressBars from '../components/ProgressBars/ProgressBars';
-import BalanceModal from '../components/BalanceModal/BalanceModal';
-import ExpenseModal from '../components/ExpenseModal/ExpenseModal';
-import ConfirmModal from '../components/ConfirmModal/ConfirmModal'; 
-import { loadState, saveState } from '../services/db';
-import './HomePage.css';
+import React, { useState, useEffect } from "react";
+import { useSnackbar } from "notistack";
+import BalanceCard from "../components/BalanceCard/BalanceCard";
+import ExpenseCard from "../components/ExpenseCard/ExpenseCard";
+import ExpensePieChart from "../components/PieChart/PieChart";
+import TransactionList from "../components/TransactionList/TransactionList";
+import ProgressBars from "../components/ProgressBars/ProgressBars";
+import BalanceModal from "../components/BalanceModal/BalanceModal";
+import ExpenseModal from "../components/ExpenseModal/ExpenseModal";
+import ConfirmModal from "../components/ConfirmModal/ConfirmModal";
+import { loadState, saveState } from "../services/db";
+import "./HomePage.css";
 
 const HomePage = () => {
   const initialState = {
@@ -31,10 +31,25 @@ const HomePage = () => {
   }, [state]);
 
   const addBalance = (amount) => {
+    if (!amount || isNaN(amount) || !/^\d+$/.test(amount)) {
+      enqueueSnackbar(
+        "Please enter a valid non-negative amount (digits only)",
+        { variant: "error" }
+      );
+      return;
+    }
+
+    // Validate if amount is non-negative
+    if (parseInt(amount) < 0) {
+      enqueueSnackbar("Amount cannot be negative", { variant: "error" });
+      return;
+    }
+
     setState((prevState) => ({
       ...prevState,
       walletBalance: prevState.walletBalance + amount,
     }));
+    enqueueSnackbar("Balance added successfully", { variant: "success" });
   };
 
   const handleAddBalanceClick = () => {
@@ -47,7 +62,7 @@ const HomePage = () => {
 
   const addExpense = (expense) => {
     if (expense.amount > state.walletBalance) {
-      enqueueSnackbar('Insufficient balance', { variant: 'error' });
+      enqueueSnackbar("Insufficient balance", { variant: "error" });
       return;
     }
 
@@ -63,6 +78,8 @@ const HomePage = () => {
       walletBalance: prevState.walletBalance - expense.amount,
       expenses: [...prevState.expenses, newExpense],
     }));
+
+    enqueueSnackbar("Expense added successfully", { variant: "success" });
   };
 
   const handleAddExpenseClick = () => {
@@ -81,14 +98,26 @@ const HomePage = () => {
   };
 
   const saveExpense = (expense) => {
+    const { title, amount, category, date } = expense;
+
+    if (!title || !amount || !category || !date) {
+      enqueueSnackbar("Please fill in all fields", { variant: "error" });
+      return;
+    }
+
     if (editingExpense) {
       const updatedExpenses = state.expenses.map((exp) =>
-        exp.id === editingExpense.id ? { ...exp, ...expense, updated_at: new Date().toISOString() } : exp
+        exp.id === editingExpense.id
+          ? { ...exp, ...expense, updated_at: new Date().toISOString() }
+          : exp
       );
+      const expenseDifference = expense.amount - editingExpense.amount;
       setState((prevState) => ({
         ...prevState,
+        walletBalance: prevState.walletBalance - expenseDifference,
         expenses: updatedExpenses,
       }));
+      enqueueSnackbar("Expense updated successfully", { variant: "success" });
     } else {
       addExpense(expense);
     }
@@ -109,7 +138,7 @@ const HomePage = () => {
       };
     });
     setConfirmDeleteOpen(false);
-    enqueueSnackbar('Expense deleted successfully', { variant: 'success' });
+    enqueueSnackbar("Expense deleted successfully", { variant: "success" });
   };
 
   const closeConfirmModal = () => {
@@ -117,24 +146,41 @@ const HomePage = () => {
   };
 
   // Calculate total expenses
-  const totalExpense = state.expenses.reduce((acc, expense) => acc + expense.amount, 0);
+  const totalExpense = state.expenses.reduce(
+    (acc, expense) => acc + expense.amount,
+    0
+  );
 
   return (
     <div>
       <div className="top-section">
-        <BalanceCard balance={state.walletBalance} onAddBalance={handleAddBalanceClick} />
-        <ExpenseCard totalExpense={totalExpense} onAddExpense={handleAddExpenseClick} />
+        <BalanceCard
+          balance={state.walletBalance}
+          onAddBalance={handleAddBalanceClick}
+        />
+        <ExpenseCard
+          totalExpense={totalExpense}
+          onAddExpense={handleAddExpenseClick}
+        />
         <ExpensePieChart expenses={state.expenses} />
       </div>
       <div className="bottom-section">
         <div className="left-column">
-          <TransactionList expenses={state.expenses} onEdit={editExpense} onDelete={deleteExpense} />
+          <TransactionList
+            expenses={state.expenses}
+            onEdit={editExpense}
+            onDelete={deleteExpense}
+          />
         </div>
         <div className="right-column">
           <ProgressBars expenses={state.expenses} />
         </div>
       </div>
-      <BalanceModal isOpen={isBalanceModalOpen} onRequestClose={handleCloseBalanceModal} onAddBalance={addBalance} />
+      <BalanceModal
+        isOpen={isBalanceModalOpen}
+        onRequestClose={handleCloseBalanceModal}
+        onAddBalance={addBalance}
+      />
       <ExpenseModal
         isOpen={isExpenseModalOpen}
         onRequestClose={handleCloseExpenseModal}
