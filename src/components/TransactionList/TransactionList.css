@@ -1,0 +1,121 @@
+.recent-transaction-title {
+  font-style: italic;
+}
+
+.recentTransactions {
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.transaction-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.transaction-details {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 100%;
+  background-color: #d9d9d9;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.transaction-icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-icon,
+.delete-icon {
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 35%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.edit-icon {
+  background-color: #f4bb4a;
+}
+
+.delete-icon {
+  background-color: #ff3e3e;
+}
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-title {
+  margin: 0;
+  font-size: 18px;
+  color: black;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.transaction-date {
+  margin: 0;
+  color: #888;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  color: #f4bb4a;
+  margin-right: 1rem;
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-arrow,
+.right-arrow {
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 0 10px 0 10px;
+  border-radius: 100%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.page-no {
+  background-color: #43967b;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+.no-data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-weight: bolder;
+}

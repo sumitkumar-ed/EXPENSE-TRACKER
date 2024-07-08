@@ -1,0 +1,45 @@
+.top-expenses {
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.top-expenses-title {
+  font-style: italic;
+}
+
+.top-expenses-item {
+  margin-bottom: 10px;
+}
+
+.top-expenses-content {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+.top-expenses-content p {
+  min-width: 130px;
+}
+.progress-bar-wrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 0 10px 10px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  line-height: 2rem;
+  border-radius: 0 10px 10px 0;
+  text-align: center;
+  color: white;
+  font-size: 9px;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-weight: bolder;
+}

@@ -1,0 +1,10 @@
+.recharts-legend-item-text {
+  color: white !important;
+  font-size: 9px;
+}
+
+path {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
