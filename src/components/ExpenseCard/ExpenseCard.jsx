@@ -5,7 +5,7 @@ import "./ExpenseCard.css";
 
 const ExpenseCard = ({ totalExpense, onAddExpense }) => (
   <Card>
-    <div className="expenseCard">
+    <div className="expense-card">
       <div className="card-header">
         <h3>Expenses :</h3>
         <p>₹{totalExpense}</p>

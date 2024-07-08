@@ -1,47 +1,51 @@
-.Modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    width: 300px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .modal-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .modal-buttons button:first-of-type {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .modal-buttons button:last-of-type {
-    background-color: #f44336;
-    color: white;
-  }
-  
+.balance-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  min-width: max-content;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balance-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.balance-modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-inline: 10px;
+}
+
+.balance-modal-buttons button:first-of-type {
+  background-color: #4caf50;
+  color: white;
+}
+
+.balance-modal-buttons button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.balance-modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.balance-modal-body input {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}

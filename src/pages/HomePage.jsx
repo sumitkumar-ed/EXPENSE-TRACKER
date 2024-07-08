@@ -34,10 +34,6 @@ const HomePage = () => {
     setState((prevState) => ({
       ...prevState,
       walletBalance: prevState.walletBalance + amount,
-      balanceHistory: [
-        ...prevState.balanceHistory,
-        { id: Date.now(), amount, created_at: new Date().toISOString() },
-      ],
     }));
   };
 
